@@ -125,15 +125,21 @@ func calc(n int64, possibleNum []int64) {
 		fmt.Println("-1")
 		return
 	}
-	resIndex := sort.Search(len(possibleNum), func(i int) bool { return possibleNum[i] < n })
-	if resIndex == len(possibleNum) {
-		fmt.Println("-1")
-		return
-	}
-	res := possibleNum[resIndexå]
+	resIndex := sort.Search(len(possibleNum), func(i int) bool { return possibleNum[i] >= n })
+	if resIndex < len(possibleNum) && possibleNum[resIndex] <= n {
+		fmt.Println(possibleNum[resIndex])
+	} else if possibleNum[resIndex-1] <= n {
+		fmt.Println(possibleNum[resIndex-1])
 
-	findClosest(possibleNum, int64(len(possibleNum))-1, n)
-	fmt.Println(res)
+	} else {
+		fmt.Println("-1")
+
+	}
+	//
+	//res := possibleNum[resIndex-1]
+	//
+	//findClosest(possibleNum, int64(len(possibleNum))-1, n)
+	//fmt.Println(res)
 
 }
 func isPrime(n int64) bool {
